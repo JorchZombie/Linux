@@ -1,0 +1,112 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 25,
+  "margin-top": 10,
+
+  "modules-left": ["wlr/taskbar"],
+  "modules-right": ["idle_inhibitor", "pulseaudio", "cpu", "memory", "temperature", "backlight", "keyboard_state", "battery", "network", "tray", "clock", "custom_power"],
+  
+  "wlr/taskbar":{
+    "format": "{icon}",
+    "icon-size": 20,
+    "icon-theme": "Star",
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "on-click-right": "minimize"
+  },
+
+  "keyboard_state":{
+    "numlock": true,
+    "capslock": true,
+    "format": " {name} {icon}",
+      "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+  },
+  
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+      }
+    },
+
+  "cpu":{
+    "format": "{usage}% 󰻠",
+    "tooltip": false
+  },
+  
+  "memory": {
+  "format": "{}% 󰍛",
+  "exec": "free | awk '/Mem/ {printf \"%d%\", ($3/$2)*100}'",
+  "interval": 5
+  },
+
+  "temperature":{
+    "critical-threshold": 80,
+    "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+    "format": "{temperatureC}°C {icon}",
+    "format-icons": ["", "", ""]
+  },
+
+  "backlight":{
+    "format": "{percent}% {icon}",
+    "format-icons": ["", ""]
+  },
+
+  "clock": {
+    "tooltip-format": "<big>{:Y% %B}</big>\n<tt><small>{calendar}<small></tt>",
+    "format-all": "{:Y%-%m-%d}"
+  },
+
+  "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-bluetooth-muted": "{icon} {format_source}",
+    "format-muted": "{format_source}",
+    "format-source-muted": "󰖁",
+    "format-icons": {
+      "default":["󰕿", "󰖀", "󰕾"],
+      "headphone": ""
+      },
+    "on-click": "pavucontrol"
+    },
+
+  "network": {
+    "interface" : "wlan0",
+    "format-wifi": "  {essid} ({signalStrength}%)",
+    "format-ethernet": "󰈁  {ifname}",
+    "format-disconnected": "󰖪  Desconectado"
+  },
+
+  "battery": {
+    "states":{
+      "good": 95,
+      "warning": 30,
+      "critical": 10
+    },
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+
+  "tray": {
+    "icon-size": 20,
+    "spacing": 10
+  },
+  
+  "custom_power":{
+    "format": "",
+    "on-click": "nwg-bar",
+    "on-click-right": "killall nwg-bar"
+  },
+
+  "style": "/home/jorch/.config/waybar/styles/top.css"
+}
